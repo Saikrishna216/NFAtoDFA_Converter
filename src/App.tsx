@@ -1,4 +1,3 @@
-// App.tsx
 import { useState, useCallback } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import { Download, Play, Plus, Trash2 } from "lucide-react";
@@ -6,16 +5,14 @@ import Home from "./Home.tsx";
 import DfaGraph from "./DfaGraph";
 import { NFAState, Transition, DFAConversionResult } from "./types";
 import { convertNFAtoDFA } from "./converter";
+import "./App.css"; // Import the CSS file
 
-// Converter Component containing your NFA-to-DFA converter logic
 function Converter() {
   const [states, setStates] = useState<NFAState[]>([]);
   const [startState, setStartState] = useState<string>("");
   const [finalStates, setFinalStates] = useState<Set<string>>(new Set());
   const [transitions, setTransitions] = useState<Transition[]>([]);
   const [convertedDFA, setConvertedDFA] = useState<DFAConversionResult | null>(null);
-
-  // Graph data for vis-network
   const [graphData, setGraphData] = useState<{
     states: string[];
     startState: string;
@@ -62,7 +59,6 @@ function Converter() {
       const dfa = convertNFAtoDFA(states, startState, Array.from(finalStates), transitions);
       setConvertedDFA(dfa);
 
-      // Prepare graph data for vis-network.
       const dfaStates = dfa.states.map((s) => s.name);
       const dfaTransitions: [string, string, string][] = [];
       dfa.states.forEach((state) => {
@@ -105,58 +101,50 @@ function Converter() {
   };
 
   return (
-    <div className="min-h-screen">
-      <header className="py-4 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl font-bold">NFA to DFA Converter</h1>
+    <div className="app-container">
+      <header className="header">
+        <h1>NFA to DFA Converter</h1>
       </header>
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="main-content">
         <div className="main-container">
-          {/* Input Sections */}
-          <div className="space-y-6">
+          <div className="content-section">
             {/* States Section */}
-            <div>
-              <h2 className="text-lg font-medium mb-4">States</h2>
-              <div className="flex flex-wrap gap-2">
+            <div className="section">
+              <h2>States</h2>
+              <div className="states-container">
                 {states.map((state) => (
-                  <div key={state.name} className="flex items-center space-x-2">
+                  <div key={state.name} className="state-item">
                     <div
-                      className={`px-4 py-2 rounded-full border cursor-pointer ${
-                        finalStates.has(state.name)
-                          ? "border-indigo-500 bg-indigo-700"
-                          : "border-gray-500 bg-gray-800"
-                      }`}
+                      className={`state-box ${finalStates.has(state.name) ? "final-state" : ""}`}
                       onClick={() => toggleFinalState(state.name)}
                       onDoubleClick={() => setStartState(state.name)}
                     >
                       {state.name}
                       {state.name === startState && (
-                        <span className="ml-1 text-green-400"> (start)</span>
+                        <span className="start-state"> (start)</span>
                       )}
                     </div>
-                    <button onClick={() => deleteState(state.name)} className="text-red-400 hover:text-red-600">
-                      <Trash2 className="h-4 w-4" />
+                    <button onClick={() => deleteState(state.name)} className="delete-button">
+                      <Trash2 className="icon" />
                     </button>
                   </div>
                 ))}
-                <button
-                  onClick={addState}
-                  className="inline-flex items-center px-3 py-2 border rounded-md text-sm font-medium"
-                >
-                  <Plus className="h-4 w-4 mr-1" />
+                <button onClick={addState} className="add-button">
+                  <Plus className="icon" />
                   Add State
                 </button>
               </div>
-              <p className="mt-2 text-sm">
+              <p className="instruction">
                 Click a state to toggle final state • Double-click to set as start state
               </p>
             </div>
 
             {/* Transitions Section */}
-            <div>
-              <h2 className="text-lg font-medium mb-4">Transitions</h2>
-              <div className="space-y-2">
+            <div className="section">
+              <h2>Transitions</h2>
+              <div className="transitions-container">
                 {transitions.map((transition, index) => (
-                  <div key={index} className="flex items-center gap-2">
+                  <div key={index} className="transition-item">
                     <select
                       value={transition.from}
                       onChange={(e) => {
@@ -164,7 +152,6 @@ function Converter() {
                         newTransitions[index].from = e.target.value;
                         setTransitions(newTransitions);
                       }}
-                      className="rounded-md"
                     >
                       <option value="">From State</option>
                       {states.map((state) => (
@@ -182,7 +169,6 @@ function Converter() {
                         setTransitions(newTransitions);
                       }}
                       placeholder="Input (ε for epsilon)"
-                      className="rounded-md w-32"
                     />
                     <select
                       value={transition.to}
@@ -191,7 +177,6 @@ function Converter() {
                         newTransitions[index].to = e.target.value;
                         setTransitions(newTransitions);
                       }}
-                      className="rounded-md"
                     >
                       <option value="">To State</option>
                       {states.map((state) => (
@@ -205,37 +190,37 @@ function Converter() {
                         const newTransitions = transitions.filter((_, i) => i !== index);
                         setTransitions(newTransitions);
                       }}
-                      className="text-red-400 hover:text-red-600"
+                      className="delete-button"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="icon" />
                     </button>
                   </div>
                 ))}
-                <button onClick={addTransition} className="inline-flex items-center px-3 py-2 border rounded-md text-sm font-medium">
-                  <Plus className="h-4 w-4 mr-1" />
+                <button onClick={addTransition} className="add-button">
+                  <Plus className="icon" />
                   Add Transition
                 </button>
               </div>
             </div>
 
             {/* Display NFA Transition Table */}
-            <div>
-              <h2 className="text-lg font-medium mb-4">NFA Transition Table</h2>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y border">
-                  <thead className="bg-gray-700">
+            <div className="section">
+              <h2>NFA Transition Table</h2>
+              <div className="table-container">
+                <table>
+                  <thead>
                     <tr>
-                      <th className="px-4 py-2 border">From State</th>
-                      <th className="px-4 py-2 border">Input</th>
-                      <th className="px-4 py-2 border">To State</th>
+                      <th>From State</th>
+                      <th>Input</th>
+                      <th>To State</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y border">
+                  <tbody>
                     {transitions.map((t, index) => (
                       <tr key={index}>
-                        <td className="px-4 py-2 border">{t.from}</td>
-                        <td className="px-4 py-2 border">{t.input}</td>
-                        <td className="px-4 py-2 border">{t.to}</td>
+                        <td>{t.from}</td>
+                        <td>{t.input}</td>
+                        <td>{t.to}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -244,102 +229,93 @@ function Converter() {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-between pt-4 border-t">
-              <div className="space-x-2">
+            <div className="actions-section">
+              <div className="action-buttons">
                 <button
                   onClick={handleConvert}
                   disabled={!startState || !isValidTransition}
-                  className="inline-flex items-center px-4 py-2 border rounded-md text-sm font-medium text-white"
+                  className="convert-button"
                 >
-                  <Play className="h-4 w-4 mr-2" />
+                  <Play className="icon" />
                   Convert to DFA
                 </button>
                 <button
                   onClick={exportData}
                   disabled={!convertedDFA}
-                  className="inline-flex items-center px-4 py-2 border rounded-md text-sm font-medium bg-white hover:bg-gray-600"
+                  className="export-button"
                 >
-                  <Download className="h-4 w-4 mr-2" />
+                  <Download className="icon" />
                   Export
                 </button>
               </div>
-              <button
-                onClick={clearAll}
-                className="inline-flex items-center px-3 py-2 border rounded-md text-sm font-medium bg-white hover:bg-gray-600"
-              >
-                <Trash2 className="h-4 w-4 mr-1" />
+              <button onClick={clearAll} className="clear-button">
+                <Trash2 className="icon" />
                 Clear All
               </button>
             </div>
           </div>
         </div>
 
-        {/* Display DFA Transition Table Above the Graph */}
+        {/* Display DFA Transition Table and Graph */}
         {convertedDFA && graphData && (
-          <div className="mt-8 border-t pt-6">
-            <h2 className="text-lg font-medium mb-4">DFA Transition Table</h2>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y border">
-                <thead className="bg-gray-700">
-                  <tr>
-                    <th className="px-4 py-2 border">State</th>
-                    {convertedDFA.states[0] &&
-                      Array.from(convertedDFA.states[0].transitions.keys()).map((symbol) => (
-                        <th key={symbol} className="px-4 py-2 border">
-                          {symbol}
-                        </th>
-                      ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y border">
-                  {convertedDFA.states.map((state) => (
-                    <tr key={state.name}>
-                      <td className="px-4 py-2 border">
-                        {state.name}
-                        {state.name === convertedDFA.startState && (
-                          <span className="ml-1 text-green-400">(start)</span>
-                        )}
-                        {state.isFinal && (
-                          <span className="ml-1 text-red-400">(final)</span>
-                        )}
-                      </td>
-                      {Array.from(state.transitions.keys()).map((symbol) => (
-                        <td key={symbol} className="px-4 py-2 border">
-                          {state.transitions.get(symbol)}
-                        </td>
-                      ))}
+          <>
+            <div className="section">
+              <h2>DFA Transition Table</h2>
+              <div className="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>State</th>
+                      {convertedDFA.states[0] &&
+                        Array.from(convertedDFA.states[0].transitions.keys()).map((symbol) => (
+                          <th key={symbol}>{symbol}</th>
+                        ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {convertedDFA.states.map((state) => (
+                      <tr key={state.name}>
+                        <td>
+                          {state.name}
+                          {state.name === convertedDFA.startState && (
+                            <span className="start-state">(start)</span>
+                          )}
+                          {state.isFinal && (
+                            <span className="final-state">(final)</span>
+                          )}
+                        </td>
+                        {Array.from(state.transitions.keys()).map((symbol) => (
+                          <td key={symbol}>{state.transitions.get(symbol)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* Display DFA Graph using vis-network */}
-        {convertedDFA && graphData && (
-          <div className="mt-8 border-t pt-6">
-            <h2 className="text-lg font-medium mb-4">DFA Graph</h2>
-            <DfaGraph data={graphData} title="DFA Graph" />
-          </div>
+            <div className="section">
+              <h2>DFA Graph</h2>
+              <DfaGraph data={graphData} title="DFA Graph" />
+            </div>
+          </>
         )}
       </main>
     </div>
   );
 }
 
-// Main App component with routing
 function App() {
   return (
     <HashRouter>
       <div>
-        <nav className="bg-gray-800 text-white p-4">
-          <ul className="flex space-x-4">
+        <nav className="navbar">
+          <ul>
             <li>
-              <Link to="/" className="hover:text-gray-300">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/converter" className="hover:text-gray-300">Converter</Link>
+              <Link to="/converter">Converter</Link>
             </li>
           </ul>
         </nav>

@@ -70,7 +70,7 @@ const DfaGraph: React.FC<DfaGraphProps> = ({ data, title = "DFA Graph" }) => {
       });
     });
 
-    const networkData = { nodes, edges };
+    const networkData = { nodes, edges};
     const options = {
       autoResize: true,
       layout: { hierarchical: false, improvedLayout: true },
