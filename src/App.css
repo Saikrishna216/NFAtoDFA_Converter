@@ -1,178 +1,342 @@
+/* App.css */
 /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1e23; /* Dark background */
+  color: #EEEEEE; /* Light text */
+  font-family: 'Inter', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #1a1e23; /* Match the body background */
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #2C3333; /* Dark background for navbar */
+  color: #B9B4C7; /* Light text color */
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #393E46; /* Subtle border */
+}
+
+.navbar-brand h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #8D72E1; /* Lavender accent color */
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links li {
+  display: inline;
+}
+
+.navbar-links a {
+  color: #B9B4C7; /* Light text color */
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #8D72E1; /* Lavender accent color on hover */
+}
+
+/* Home Page Styles */
+.home-page {
+  background-color: #1a1e23; /* Dark background */
+  color: #EEEEEE; /* Light text */
+  font-family: 'Inter', Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-container {
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+  background-color: #393E46; /* Dark gray */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.home-title {
+  font-size: 2rem;
+  color: #8D72E1; /* Lavender */
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.home-description {
+  font-size: 1.25rem;
+  color: #B9B4C7; /* Light purple */
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-  
-  .main-container {
-    width: 100%;
-    max-width: 800px;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .section {
-    margin-bottom: 2rem;
-  }
-  
-  h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
-  
-  /* States Section */
-  .states-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  .state-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .state-box {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-    background-color: #f9f9f9;
-  }
-  
-  .state-box.final-state {
-    border-color: #4c51bf;
-    background-color: #4c51bf;
-    color: white;
-  }
-  
-  .start-state {
-    color: green;
-  }
-  
-  .delete-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #e53e3e;
-  }
-  
-  .add-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #4c51bf;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .instruction {
-    font-size: 0.875rem;
-    color: #666;
-  }
-  
-  /* Transitions Section */
-  .transitions-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .transition-item {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  select, input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Table Styles */
-  .table-container {
-    overflow-x: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #333;
-    color: white;
-  }
-  
-  /* Actions Section */
-  .actions-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #ccc;
-    padding-top: 1rem;
-  }
-  
-  .action-buttons {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .convert-button, .export-button, .clear-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #4c51bf;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .convert-button:disabled, .export-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .clear-button {
-    background-color: #e53e3e;
-  }
-  
-  .icon {
-    margin-right: 0.5rem;
-  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Ensure items are stacked vertically */
+  align-items: center; /* Center content horizontally */
+  padding: 2rem;
+  background-color: #1a1e23; /* Dark background */
+}
+
+.main-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #393E46; /* Dark gray */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  margin-bottom: 2rem; /* Add space below the main container */
+}
+
+/* Form Container */
+.content-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.dfa-display-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #1a1e23; /* Match the background color of the main container */
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 2rem; /* Space between form and DFA display */
+  display: flex;
+  flex-direction: column; /* Ensure items are stacked vertically */
+}
+
+/* Section Styles */
+.section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #8D72E1; /* Lavender */
+}
+
+/* States Section */
+.states-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.state-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.state-box {
+  padding: 0.5rem 1rem;
+  border: 1px solid #4A4E69; /* Muted purple-gray */
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #2C3333; /* Dark purple */
+  color: #EEEEEE; /* Silver */
+}
+
+.state-box.final-state {
+  border-color: #8D72E1; /* Lavender */
+  background-color: #8D72E1; /* Lavender */
+  color: #2C3333; /* Dark purple */
+}
+
+.start-state {
+  color: #B9B4C7; /* Light purple */
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8D72E1; /* Lavender */
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #8D72E1; /* Lavender */
+  color: #222831; /* Deep slate */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.instruction {
+  font-size: 0.875rem;
+  color: #B9B4C7; /* Light purple */
+}
+
+/* Transitions Section */
+.transitions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transition-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+select, input {
+  padding: 0.5rem;
+  border: 1px solid #4A4E69; /* Muted purple-gray */
+  border-radius: 4px;
+  background-color: #2C3333; /* Dark purple */
+  color: #EEEEEE; /* Silver */
+}
+
+/* Table Styles */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #4A4E69; /* Muted purple-gray */
+  text-align: left;
+  color: #EEEEEE; /* Silver */
+}
+
+th {
+  background-color: #2C3333; /* Dark purple */
+  color: #8D72E1; /* Lavender */
+}
+
+/* Actions Section */
+.actions-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #4A4E69; /* Muted purple-gray */
+  padding-top: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.convert-button, .export-button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #8D72E1; /* Lavender */
+  color: #222831; /* Deep slate */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.convert-button:hover, .export-button:hover {
+  opacity: 0.9;
+}
+
+.convert-button:disabled, .export-button:disabled {
+  background: #4A4E69; /* Muted purple-gray */
+  cursor: not-allowed;
+}
+
+.clear-button {
+  background-color: #2C3333; /* Dark purple */
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: #B9B4C7; /* Light purple */
+  border: 1px solid #4A4E69; /* Muted purple-gray */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.clear-button:hover {
+  opacity: 0.9;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+/* DFA Graph Section */
+.dfa-graph {
+  background-color: #393E46; /* Match the background color of the main container */
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2C3333; /* Dark purple */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A4E69; /* Muted purple-gray */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8D72E1; /* Lavender */
+}

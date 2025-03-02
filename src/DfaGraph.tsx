@@ -13,7 +13,7 @@ interface DfaGraphProps {
   title?: string;
 }
 
-const DfaGraph: React.FC<DfaGraphProps> = ({ data, title = "DFA Graph" }) => {
+const DfaGraph: React.FC<DfaGraphProps> = ({ data}) => {
   const { states, startState, finalStates, transitions } = data;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +51,7 @@ const DfaGraph: React.FC<DfaGraphProps> = ({ data, title = "DFA Graph" }) => {
         edgeGroups.set(key, { symbols: [symbol], source, target });
       }
     });
-    const edges = [];
+    const edges: { id: string; from: string; to: string; label: string; arrows: string; smooth: { type: string; roundness: number }; font: { color: string; align: string }; color: { color: string } }[] = [];
     edgeGroups.forEach((group) => {
       const { symbols, source, target } = group;
       const count = symbols.length;
@@ -79,12 +79,12 @@ const DfaGraph: React.FC<DfaGraphProps> = ({ data, title = "DFA Graph" }) => {
         size: 30,
         font: { size: 16 },
         borderWidth: 2,
-        margin: 10,
+        margin: { top: 10, right: 10, bottom: 10, left: 10 },
       },
       edges: {
         width: 2,
         arrows: { to: { scaleFactor: 0.5 } },
-        smooth: { type: "cubicBezier" },
+        smooth: { enabled: true, type: "cubicBezier", roundness: 0.5 },
       },
       physics: false,
     };
@@ -98,7 +98,6 @@ const DfaGraph: React.FC<DfaGraphProps> = ({ data, title = "DFA Graph" }) => {
 
   return (
     <div className="DfaGraph">
-      <h2 style={{ color: "#e0e0e0" }}>{title}</h2>
       <p style={{ color: "#e0e0e0" }}>
         <span style={{ color: "#FF4500" }}>Red</span> represents final states and{" "}
         <span style={{ color: "#00FF00" }}>green</span> represents the start state.

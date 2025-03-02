@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import { Download, Play, Plus, Trash2 } from "lucide-react";
-import Home from "./Home.tsx";
+import Home from "./Home";
 import DfaGraph from "./DfaGraph";
 import { NFAState, Transition, DFAConversionResult } from "./types";
 import { convertNFAtoDFA } from "./converter";
@@ -102,9 +102,6 @@ function Converter() {
 
   return (
     <div className="app-container">
-      <header className="header">
-        <h1>NFA to DFA Converter</h1>
-      </header>
       <main className="main-content">
         <div className="main-container">
           <div className="content-section">
@@ -258,7 +255,7 @@ function Converter() {
 
         {/* Display DFA Transition Table and Graph */}
         {convertedDFA && graphData && (
-          <>
+          <div className="dfa-display-container">
             <div className="section">
               <h2>DFA Transition Table</h2>
               <div className="table-container">
@@ -298,30 +295,86 @@ function Converter() {
               <h2>DFA Graph</h2>
               <DfaGraph data={graphData} title="DFA Graph" />
             </div>
-          </>
+          </div>
         )}
       </main>
     </div>
   );
 }
 
+function Examples() {
+  return (
+    <div className="container">
+      <h2>NFA to DFA Conversion Examples</h2>
+      <div className="examples-list">
+        <div className="example-card">
+          <h3>Example 1: Basic NFA</h3>
+          <p>A simple NFA with epsilon transitions</p>
+          <button className="load-button">Load Example</button>
+        </div>
+        <div className="example-card">
+          <h3>Example 2: Complex NFA</h3>
+          <p>Multiple states with various transitions</p>
+          <button className="load-button">Load Example</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Help() {
+  return (
+    <div className="container">
+      <h2>How to Use the NFA to DFA Converter</h2>
+      <div className="help-content">
+        <h3>Creating States</h3>
+        <p>Click "Add State" to create new states. Click on a state to mark it as a final state. Double-click to set it as the start state.</p>
+        
+        <h3>Adding Transitions</h3>
+        <p>Use the transition form to define moves from one state to another based on input symbols. Use "ε" for epsilon transitions.</p>
+        
+        <h3>Converting to DFA</h3>
+        <p>Once your NFA is defined, click "Convert to DFA" to see the equivalent DFA and its visualization.</p>
+      </div>
+    </div>
+  );
+}
+
+function CreateNFA() {
+  return <Converter />;
+}
+
 function App() {
   return (
     <HashRouter>
       <div>
+        {/* Main Navbar */}
         <nav className="navbar">
-          <ul>
+          <div className="navbar-brand">
+            <h1>NFA DFA Converter</h1>
+          </div>
+          <ul className="navbar-links">
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/converter">Converter</Link>
             </li>
+            <li>
+              <Link to="/converter/examples">Examples</Link>
+            </li>
+            <li>
+              <Link to="/converter/help">Help</Link>
+            </li>
           </ul>
         </nav>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/converter" element={<Converter />} />
+          <Route path="/converter/create" element={<CreateNFA />} />
+          <Route path="/converter/examples" element={<Examples />} />
+          <Route path="/converter/help" element={<Help />} />
         </Routes>
       </div>
     </HashRouter>

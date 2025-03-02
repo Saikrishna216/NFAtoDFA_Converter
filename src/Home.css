@@ -1,0 +1,55 @@
+/* Home.css */
+.home-page {
+    background-color: #1a1e23; /* Dark background */
+    color: #EEEEEE; /* Light text */
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .home-container {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: #393E46; /* Dark gray */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  }
+  
+  .home-title {
+    font-size: 2rem;
+    color: #8D72E1; /* Lavender */
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .home-description {
+    font-size: 1.25rem;
+    color: #B9B4C7; /* Light purple */
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Keyframes for fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fadeIn 1.5s ease-in-out;
+  }
