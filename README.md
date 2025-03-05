@@ -29,5 +29,5 @@ The NFA to DFA Converter is a web-based application designed to help users conve
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/NFA_DFA_Converter.git
+   git clone https://github.com/Saikrishna216/NFA_DFA_Converter.git
    cd NFA_DFA_Converter
