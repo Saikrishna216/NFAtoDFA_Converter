@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# NFA to DFA Converter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+The NFA to DFA Converter is a web-based application designed to help users convert Non-deterministic Finite Automata (NFA) to Deterministic Finite Automata (DFA). This tool is particularly useful for students, educators, and professionals in the field of computer science and automata theory.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **User-Friendly Interface:** The application provides an intuitive and easy-to-use interface for inputting NFA states, transitions, and other parameters.
+- **Real-Time Conversion:** As users input their NFA details, the application performs real-time conversion to DFA, displaying the results instantly.
+- **Graphical Representation:** The converted DFA is displayed graphically, allowing users to visualize the states and transitions clearly.
+- **Detailed Information:** The application provides detailed information about the start state, final states, and transitions for both NFA and DFA.
+- **Responsive Design:** The application is designed to be responsive, ensuring a seamless experience across different devices and screen sizes.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend:** React.js for building the user interface, with CSS for styling.
+- **Visualization:** Vis.js for rendering the graphical representation of the automata.
+- **Backend:** Node.js and Express.js for handling server-side logic and API requests.
+- **State Management:** Redux for managing the application state.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## How to Use
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Input NFA Details:** Enter the states, start state, final states, and transitions for the NFA.
+2. **Convert to DFA:** Click the "Convert to DFA" button to perform the conversion.
+3. **View Results:** The converted DFA will be displayed graphically below the input form, with detailed information about the states and transitions.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Installation and Setup
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/Saikrishna216/NFA_DFA_Converter.git
+   cd NFA_DFA_Converter
